@@ -1,0 +1,180 @@
+EJERCICIOS SWAP Angel García Illescas
+
+TEMA 2
+
+Ejercicio T2.1 Calcular la disponibilidad del sistema si tenemos dos réplicas de cada elemento (en total 3 elementos en cada subsistema).
+Partimos de un sistema formado por Web, Applications, Database, DNS, Firewall, Switch, un Data Center e ISP con las siguientes disponibilidades:
+•	Web: 85%
+•	Applications: 90%
+•	Database: 99.9%
+•	DNS: 98%
+•	Firewall: 85%
+•	Switch: 99%
+•	Data Center: 99.99%
+•	ISP: 95%
+Utilizaremos la fórmula As = Ac1 + ((1 - Ac1) * Ac2) para medir la mejora de un elemento al replicarlo y As = Ac1 * Ac2 * Ac3 * ... * Acn que mide la disponibilidad final de sistema.
+Si añadimos una réplica de cada componente:
+•	Web: 0.85 + (1-0.85) * 0.85 = 0.9775
+•	Applications: 0.9 + (1-0.9) * 0.9 = 0.99
+•	Database: 0.999 + (1-0.999) * 0.999 = 0.999999
+•	DNS: 0.98 + (1-0.98) * 0.98 = 0.9996
+•	Firewall: 0.9775 (La misma que el componente Web).
+•	Switch: 0.99 + (1-0.99) * 0.99 = 0.9999
+•	Data Center: 0.9999 + (1-0.9999) * 0.9999 = 0.99999999
+•	ISP: 0.95 + (1-0.95) * 0.95 = 0.9975
+Disponibilidad al replicar una vez: 94.3%
+Si añadimos otra réplica tendremos:
+•	Web: 0.0.9775 + (1-0.9775) * 0.85 = 0.996625
+•	Applications: 0.99 + (1-0.99) * 0.9 = 0.999
+•	Database: 0.999999 + (1-0.999999) * 0.999 = 0.999999999
+•	DNS: 0.9996 + (1-0.9996) * 0.98 = 0.999992
+•	Firewall: 0.996625 (La misma que el componente Web).
+•	Switch: 0.9999 + (1-0.9999) * 0.99 = 0.999999
+•	Data Center: 0.99999999 + (1-0.99999999) * 0.9999 = 0.999999999999
+•	ISP: 0.9975 + (1-0.9975) * 0.95 = 0.999875
+Disponibilidad al replicar por segunda vez: 99.213%
+
+Ejercicio T2.2 Buscar frameworks y librerías para diferentes lenguajes que permitan hacer aplicaciones altamente disponibles con relativa facilidad.
+Como ejemplo, examina PM2 https://github.com/Unitech/pm2 que sirve para administrar clústeres de NodeJS.
+1.	NodeJS: PM2.
+2.	Java: JBoss.
+3.	JavaScript: AngularJS.
+4.	Python: Django, TurboGears.
+5.	PHP: Yii, PHPOpenbiz, CakePHP.
+6.	Otras
+o	Juno OS: Librería de alta disponibilidad para comunicaciones basadas en intercambio de paquetes.
+o	Nagios XI: Librería incluída en Nagios para implementar rutinas de alta disponibilidad.
+o	UltraMonkey, Linux Virtual Server: Frameworks para alta disponibilidad en GNU/Linux.
+
+Ejercicio T2.3 ¿Cómo analizar el nivel de carga de cada uno de los subsistemas en el servidor? Buscar herramientas y aprender a usarlas.
+En la web existe información sobre muchas herramientas de carga como:
+•	LoadRunner: Software propietario de HP para medir carga en servidores.
+•	ApacheBench: Herramienta creada por la fundación Apache para realizar pruebas de carga.
+•	Siege: Creada por JoeDog Software.
+•	Nagios.
+•	Ganglia.
+•	HeavyLoad: Software libre para realizar pruebas de carga a servidores web.
+•	(Interesante) en este enlace se habla sobre 10 aplicaciones de software libre para medir niveles de carga en servidores: http://www.devcurry.com/2010/07/10-free-tools-to-loadstress-test-your.html
+•	(Tutoriales) Para hacer pruebas con las herramientas más utilizadas actualmente para hacer prueba de carga a servidores se puede consultar el siguiente link: http://codehero.co/como-hacer-pruebas-de-carga-servidores-web/.
+
+Ejercicio T2.4 Buscar ejemplos de balanceadores software y hardware (productos comerciales).
+Ejemplos de balanceadores Software y Hardware comerciales son:
+•	Software: Kemp, HAProxy, LVS (Linux Virtual Server), Nginx, Pound, Pen, Zen Load Balancer.
+•	Hardware: CISCO, F5 BIG-IP LTM, Radware AppDirector, Ondemand Switch, Coyote Point, Barracuda, etc.
+
+Buscar productos comerciales para servidores de aplicaciones.
+Ejemplos de servidores de aplicaciones comerciales son: GlassFish, Java EE, Microsoft .Net, BEA WebLogic, IBM WebSphere, Sun-Netscape IPlanet, Sun One, Orace IAS, HP Bluestone, Base4 Server o Zope (Código abierto).
+Buscar productos comerciales para servidores de almacenamiento.
+ Ejemplos de productos comerciales para servidores de almacenamiento: HP ProLiant, Amazon EC2, Windows Azure, Dell PowerEdge, Lenovo ThinkServer, FlyTech, etc.
+
+TEMA 3
+
+Ejercicio T3.1 Buscar con qué órdenes de terminal o herramientas gráficas podemos configurar bajo Windows y bajo Linux el enrutamiento del tráfico de un servidor para pasar el tráfico desde una subred a otra.
+Para configurar el tráfico de red de forma manual mediante comandos en Linux podemos seguir el siguiente tutorial en el que se enseña a hacerlo usando iptables: http://www.ite.educacion.es/formacion/materiales/85/cd/linux/m6/enrutamiento_en_linux.html
+Para Windows puede seguirse este tutorial en el que se usa route: http://blog.networkbits.es/?p=32
+Entre las herramientas que permiten hacerlo de forma gráfica se encuentran:
+•	OpenBGD: http://es.wikipedia.org/wiki/OpenBGPD
+•	Quagga: http://es.wikipedia.org/wiki/Quagga_(enrutador)
+•	XORP: http://xorp.org/
+•	BIRD.
+•	GNU Zebra.
+
+Ejercicio T3.2 Buscar con qué órdenes de terminal o herramientas gráficas podemos configurar bajo Windows y bajo Linux el filtrado y bloqueo de paquetes.
+•	Linux Las órdenes que podemos usar son: iptables, ip o tc (linux traffic control).
+•	Windows La orden más conocida es route.
+Herramientas gráficas
+•	Shorewall
+•	WireShark (más conocido. Versiones tanto para Linux como para Windows)
+•	PRTG
+•	CocoaPacket Analyzer
+•	Acrylic Wifi
+
+TEMA 4
+
+Ejercicio T4.1 Buscar información sobre cuánto costaría en la actualidad un mainframe. Comparar precio y potencia entre esa máquina y una granja web de unas prestaciones similares.
+No se he encontrado información suficiente como para contestar a la pregunta sin embargo he encontrado la siguiente información:
+Mainframes [1] Obviamente en la actualidad no muchos proveedores se dedican a fabricar mainframes ya que dejaron de usarse hace mucho tiempo por su coste, mantenimiento, espacio ocupado, etc...
+Los únicos que siguen atreviéndose a lanzar mainframes es IBM que lanzo su nuevo modelo z13 en 2011-2012 por un valor aproximado de $75.000 y las características que podemos observar en este enlace http://www-03.ibm.com/systems/z/hardware/z13_specs.html. El modelo anterior z10 lanzado en 2008 costaría alrededor de $100.000.
+Por lo que estimamos el precio de un mainframe entre los 75.000 - 100.000 dólares sin contar mantenimiento, instalación, documentación, etc...
+Granja web [2] En esta web http://www.gmv.com/blog_gmv/caso-de-gestion-la-granja-web/ vemos un caso proactivo de gestión de una granja web planteado a los alumnos de la UPC y de la UC3M en el cual se plantean varias actividades.
+En una de ellas podemos ver que un equipo más moderno o igual al que ya había costaría alrededor de 11.625 - 10.775 euros, que yo calculo que aproximadamente con 4 o 5 equipos de ese precio tendríamos más o menos las mismas prestaciones que el mainframe si no más.
+Y ya quitando el precio que es más barato obtendríamos todas las ventajas que tiene una granja web frente a un mainframe.
+
+Ejercicio T4.2 Buscar información sobre precio y características de balanceadores hardware específicos. Compara las prestaciones que ofrecen unos y otros.
+Vigor2926 – 522,00 € --> http://www.draytekonline.com/p/197/Routers%20y%20Balanceadores/Balanceador%202%20WAN%20Ethernet%20y%203G/4G/Vigor%202960/ 
+TP-LINK TL-ER6020 - 129,00 € --> http://www.pccomponentes.com/tp_link_tl_er6020___router_balanceador_carga_daul_wan_vpn.html 
+NETGEAR FVS124G - 188,77 € --> http://www.amazon.com/NETGEAR-FVS124G-ProSafe-Gigabit-Firewall/dp/B0009RH7E6 
+ZyXEL ZyWALL 70 - 269,99 €--> http://www.amazon.com/ZyXEL-Internet-Security-Appliance-Balancing/dp/B0001H2AKK
+
+Ejercicio T4.3 Buscar información sobre los métodos de balanceo que implementan los dispositivos recogidos en el ejercicio 4.2
+Ejercicio T4.4 Instala y configura en una máquina virtual el balanceador ZenLoadBalancer. Compara con la dificultad de la instalación y configuración usando nginx o haproxy (práctica 3).
+Ejercicio T4.5 Probar las diferentes maneras de redirección HTTP. ¿Cuál es adecuada y cuál no lo es para hacer balanceo de carga global? ¿Por qué?
+Ejercicio T4.6 Buscar información sobre los bloques de IP para los distintos países o continentes. Implementar en JavaScript o PHP la detección de la zona desde donde se conecta un usuario.
+Ejercicio T4.7 Buscar información sobre métodos y herramientas para implementar GSLB.
+
+TEMA 5
+
+Ejercicio T5.1 Buscar información sobre cómo calcular el número máximo de conexiones por segundo.
+Para calcular el número de conexiones por segundo de una granja web o de un servidor específico podríamos usar herramientas como Apache Benchmark. Para medir las peticiones con esta herramienta estudiada en clase podríamos aumentar progresivamente el número de peticiones por segundo mientras no se produjese ningún error en ninguna de las peticiones, momento en el que tendríamos una aproximación del número máximo de peticiones soportadas de forma simultánea. Esta manera de proceder es extensible a la mayoría de los benchmarks para servidores (Apache Jmeter, OpenWebLoad, Httperf, etc).
+Si lo que queremos monitorizar es son el número de peticiones que el servidor está soportando actualmente, podemos activar opciones (presentes en determinados programas como Apache Benchmark o httperf) como mod-status. Para usar esta característica podemos usar el siguiente código:
+<Location /server-status>
+SetHandler server-status
+Order Deny,Allow
+Deny from all
+Allow from .website.com
+</Location>
+Y, para acceder, usamos http://your.server.name/server-status.
+Además del mencionado mod-status existen otras utilidades como apache2ctl, iptstate o netstat.
+
+Ejercicio T5.2 Instalar wireshark y observar cómo fluye el tráfico de red en uno de los servidores web mientras se le hacen peticiones HTTP.
+
+Ejercicio T5.3 Buscar información sobre características, disponibilidad para diversos SO, etc de herramientas para monitorizar las prestaciones de un servidor.
+Algunas de las herramientas más utilizadas en la actualidad para la monitorización de las prestaciones de los servidores:
+Nagios: es un sistema de monitorización de redes ampliamente utilizado, de código abierto, que vigila los equipos (hardware) y servicios (software) que se especifiquen, alertando cuando el comportamiento de los mismos no sea el deseado. Entre sus características principales figuran la monitorización de servicios de red (SMTP, POP3, HTTP, SNMP...), la monitorización de los recursos de sistemas hardware (carga del procesador, uso de los discos, memoria, estado de los puertos...), independencia de sistemas operativos, posibilidad de monitorización remota mediante túneles SSL cifrados o SSH, y la posibilidad de programar plugins específicos para nuevos sistemas.
+Se trata de un software que proporciona una gran versatilidad para consultar prácticamente cualquier parámetro de interés de un sistema, y genera alertas, que pueden ser recibidas por los responsables correspondientes mediante (entre otros medios) correo electrónico y mensajes SMS, cuando estos parámetros exceden de los márgenes definidos por el administrador de red. Más información en http://es.wikipedia.org/wiki/Nagios
+Cacti: es una herramienta para la generación de gráficos en red, diseñada para aprovechar el poder de almacenamiento y la funcionalidad para gráficas que poseen las aplicaciones RRDtool. Esta herramienta, desarrollada en PHP, provee un pooler ágil, plantillas de gráficos avanzadas, múltiples métodos para la recopilación de datos, y manejo de usuarios. Tiene una interfaz de usuario fácil de usar, que resulta conveniente para instalaciones del tamaño de una LAN, así como también para redes complejas con cientos de dispositivos. Más información en http://www.cacti.net/
+Munin: Munin es un programa que permite monitorizar uno o varios equipos. Además, presenta la información a través de un servidor web, está hecho en perl y permite el uso de plugins, lo cual lo hace realmente versátil. También muestra una gran cantidad de información mediante unas gráficas creadas con la librería gráfica RRDtool. Más información en http://www.n1mh.org/monitorizando-redes-con-munin/
+AWStats: es una herramienta open source de informes de análisis web, apto para analizar datos de servicios de Internet como un servidor web, streaming, mail y FTP. AWstats analiza los archivos de log del servidor, y basándose en ellos produce informes HTML. Los datos son presentados visualmente en informes de tablas y gráficos de barra. Pueden crearse informes estáticos mediante una interfaz de línea de comando, y se pueden obtener informes on-demand a través de un navegador web, gracias a un programa CGI.
+Soporta la mayoría de los formatos de archivos log de servidor web conocidos, entre ellos Apache (formato de log NCSA combinado/XLF/ELF o formato común/CLFt), WebStar, IIS (formato de log del W3C) y muchos otros formatos comunes de Internet. Más información en http://es.wikipedia.org/wiki/Awstats
+Ganglia: es un sistema de monitorización de computadores de alto rendimiento como clusters o servidores alojados en granjas web. Gracias a sus algoritmos consume bastante poco por nodo y utiliza una alta concurrencia a la hora de obtener toda la información tanto a nivel de servicios como hardware de nuestros servidores. Más información en http://ganglia.sourceforge.net/
+
+TEMA 6
+
+Ejercicio T6.1 Aplicar con iptables una política de denegar todo el tráfico en una de las máquinas de prácticas.
+Comprobar el funcionamiento.
+Aplicar con iptables una política de permitir todo el tráfico en una de las máquinas de prácticas.
+Comprobar el funcionamiento.
+
+Ejercicio T6.2 Comprobar qué puertos tienen abiertos nuestras máquinas, su estado, y qué programa o demonio lo ocupa.
+
+Ejercicio T6.3 Buscar información acerca de los tipos de ataques más comunes en servidores web, en qué consisten, y cómo se pueden evitar.
+Algunos de los ataques más comunes en servidores web son los siguientes:
+•	Sniffers. Estas herramientas monitorean y capturan información a través de una red. Más información y ejemplos en http://www.valencynetworks.com/articles/cyber-security-attacks-network-sniffing.html
+•	Backdoors. Estas herramientas dan acceso remoto para controlar los sistemas infectados y, cuando son ejecutados, corren encubiertamente. Más información en http://en.wikipedia.org/wiki/Backdoor_%28computing%29
+•	Keyloggers y Spyware. Dichos ataques permiten instalarse silenciosamente en la PC con el fin de enviar datos sobre la información que la víctima teclea o almacena en el sistema, incluso, sobre sus hábitos en Internet.
+•	Inyección SQL. Es una técnica de ataque utilizada para explotar vulnerabilidades en páginas Web que tienen una ruta de comunicación con bases de datos.
+•	Violación de usos aceptables y otras políticas. En realidad, este ataque no distingue si fue cometido de manera accidental o premeditada, la violación a una política fue tener graves consecuencias.
+•	Acceso no autorizado mediante listas de control de acceso débil o mal configuradas (ACL). Cuando hay las condiciones el atacante puede acceder a recursos y llevar a cabo acciones sin que la víctima se dé por enterada.
+•	Acceso no autorizado con credenciales predeterminadas. Son los métodos a través de los cuales los atacantes obtienen acceso a un dispositivo o sistema protegido con contraseñas y nombres de usuario predeterminados o estandarizados.
+•	Para finalizar, uno de los ataques más comunes que se están realizando actualmente, a cada segundo que pasa y a nivel mundial es el ataque mediante bots o botnets. Una página interesante en la que comprender qué son y cómo funcionan es http://en.wikipedia.org/wiki/Internet_bot o http://es.norton.com/botnet (resumen en español).
+
+TEMA 7
+
+Ejercicio T7.1 ¿Qué tamaño de unidad de unidad RAID se obtendrá al configurar un RAID 0 a partir de dos discos de 100 GB y 100 GB?
+`Con dos discos de 100GB se obtiene un RAID 0 de 200GB`.
+¿Qué tamaño de unidad de unidad RAID se obtendrá al configurar un RAID 0 a partir de tres discos de 200 GB cada uno?
+`Con estos tres discos se obtiene un RAID 0 de 600GB de capacidad`.
+
+Ejercicio T7.2 ¿Qué tamaño de unidad de unidad RAID se obtendrá al configurar un RAID 1 a partir de dos discos de 100 GB y 100 GB?
+`Al ser un RAID 1 se tratan como hardware independiente, por tanto sería 100GB`.
+¿Qué tamaño de unidad de unidad RAID se obtendrá al configurar un RAID 1 a partir de tres discos de 200 GB cada uno?
+`Al ser un RAID 1 se tratan como hardware independientes, por tanto sería 200GB`.
+
+Ejercicio T7.3 ¿Qué tamaño de unidad de unidad RAID se obtendrá al configurar un RAID 5 a partir de tres discos de 120 GB cada uno? 
+`Como se trata de un RAID5, se utiliza 1 para paridad de los datos. Por tanto, seria 120 + 120 = 240GB, siendo el último 120 el que se queda para paridad de los datos`.
+Ejercicio T7.4 Buscar información sobre los sistemas de ficheros en red más utilizados en la actualidad y comparar sus características. Hacer una lista de ventajas e inconvenientes de todos ellos, así como grandes sistemas en los que se utilicen.
+•	NFS es un protocolo de nivel de aplicación, según el Modelo OSI. Es utilizado para sistemas de archivos distribuido en un entorno de red de computadoras de área local. Posibilita que distintos sistemas conectados a una misma red accedan a ficheros remotos como si se tratara de locales. Entre sus características destacan: 1 El sistema NFS está dividido al menos en dos partes principales: un servidor y uno o más clientes. Los clientes acceden de forma remota a los datos que se encuentran almacenados en el servidor. 2 Las estaciones de trabajo locales utilizan menos espacio de disco debido a que los datos se encuentran centralizados en un único lugar pero pueden ser accedidos y modificados por varios usuarios, de tal forma que no es necesario replicar la información. 3 Los usuarios no necesitan disponer de un directorio “home” en cada una de las máquinas de la organización. Los directorios “home” pueden crearse en el servidor de NFS para posteriormente poder acceder a ellos desde cualquier máquina a través de la infraestructura de red. 4 También se pueden compartir a través de la red dispositivos de almacenamiento como disqueteras, CD-ROM y unidades ZIP. Esto puede reducir la inversión en dichos dispositivos y mejorar el aprovechamiento del hardware existente en la organización. 5 Todas las operaciones sobre ficheros son síncronas. Esto significa que la operación sólo retorna cuando el servidor ha completado todo el trabajo asociado para esa operación. En caso de una solicitud de escritura, el servidor escribirá físicamente los datos en el disco, y si es necesario, actualizará la estructura de directorios, antes de devolver una respuesta al cliente. Esto garantiza la integridad de los ficheros.
+Fuente: http://es.wikipedia.org/wiki/Network_File_System
+•	Samba es una re implementación del protocolo de red SMB/CIFS. Facilita el intercambio de ficheros y de impresoras entre sistemas Linux y Windows, o entre sistemas Linux -como una alternativa a Nfs. Se configura fácilmente. Más información en http://en.wikipedia.org/wiki/Server_Message_Block
+•	AFS ("Andrew File System") o AFS1 es un sistema de archivos distribuido a través de la red que fue desarrollado como parte del proyecto Andrew por la Universidad Carnegie Mellon.2 Su nombre proviene de Andrew Carnegie y Andrew Mellon. Es utilizado fundamentalmente en entornos de computación distribuida. Más información en http://es.wikipedia.org/wiki/Andrew_File_System
+
